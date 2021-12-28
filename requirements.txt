@@ -1,1 +1,6 @@
-Microsoft Visual C++ 14.0
+- Microsoft Visual C++ 14.0
+- pysqlclient
+- python-sql-connector
+- sql server
+- sql client
+- python.3.6.0
