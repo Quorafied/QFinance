@@ -1,4 +1,5 @@
 import PySimpleGUI as gui
+from myDecorators import *
 
 # Class that defines how the main Graphical User Interface will be layed out and how it will interact with back-end and database.
 class GUI():
@@ -18,7 +19,7 @@ class GUI():
     
     # Append Object
     def appendObj(self, obj):
-        self.objects[obj] = obj.t_id
+        self.objects[str(obj.t_id)] = obj
         self.titles.append(f"{obj.t_id} {obj.name}")
     
     # Remove Object from Listbox and Dictionary of the GUI
@@ -28,6 +29,7 @@ class GUI():
 
         
     # Event Loop
+    @debug
     def loopThrough(self):
         while True:
             event, values = self.window.read()
@@ -50,11 +52,14 @@ class GUI():
                 selected = values['-LIST-']
                 print(f"Selected : {selected}")
                 print(f"Titles available : {self.titles}")
+                print(f"Dictionary of objects: {self.objects}")
 
             # Removes object
             if event == 'Remove':
-                self.titles.remove(selected)
+                self.titles.remove(" ".join(selected))
                 self.objects.pop(selected[0][0])
+                # display original unfiltered list
+                self.window['-LIST-'].update(self.titles)
 
 
         self.window.close()
