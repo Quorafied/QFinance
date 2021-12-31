@@ -10,15 +10,21 @@ db.setCursor() # This sets up a Cursor that will point and execute SQL Queries
 db.createDatabase("QFinance") # SQL Query - Creates a database called "QFinance"
 db.useDatabase("QFinance")# SQL Query - Point to a database to be altered by further actions
 
-class oneObj():
-    def __init__(self):
-        self.name = "Barclays"
-        self.t_id = 1
+'''To Change when SQL Database has methods to be modified'''
+class tableObj():
+    def __init__(self, n, id):
+        self.name = n
+        self.t_id = id
 
-dasObj = oneObj()
+# Uncomment to debug
+# anObj = oneObj("Barclays", 1)
+# twoObj = oneObj("Kujawiak", 3)
+# threeObj = oneObj("Barclays", 2)
 
 mainGUI = GUI()
-mainGUI.appendObj(dasObj)
+# Uncomment to debug
+# for i in (anObj, twoObj, threeObj):
+#     mainGUI.appendObj(i)
 
 mainGUI.loopThrough()
 
