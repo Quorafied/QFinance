@@ -7,15 +7,16 @@ class GUI():
         # Initiate the oject with empty Listbox.
         self.titles = []
         self.objects = {}
-
-        self.layout = [[gui.Text('Search for titles'), gui.Text('Search for dates', pad=(50, 2))],
+        
+        # Define the layout of the main window
+        self.mainLayout = [[gui.Text('Search for titles'), gui.Text('Search for dates', pad=(50, 2))],
                 [gui.Input(size=(14, 1), enable_events=True, key='-TITLEINPUT-'), gui.Input(size=(14, 1), enable_events=True, key='-DATEINPUT-', pad=(40, 2))],
                 [gui.Listbox(self.titles, size=(20, 4), enable_events=True, key='-LIST-', expand_x=True)],
                 [gui.Button('Chrome'), gui.Button('Exit')],
                 [gui.Button("Remove")]
                 ]
 
-        self.window = gui.Window('QFinance - Main Page', self.layout, size=(500, 400), resizable=True)
+        self.window = gui.Window('QFinance - Main Page', self.mainLayout, size=(500, 400), resizable=True, finalize=True)
     
     # Append Object
     def appendObj(self, obj):

@@ -22,6 +22,7 @@ class tableObj():
 # threeObj = oneObj("Barclays", 2)
 
 mainGUI = GUI()
+db.createTables()
 # Uncomment to debug
 # for i in (anObj, twoObj, threeObj):
 #     mainGUI.appendObj(i)

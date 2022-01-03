@@ -48,8 +48,8 @@ class sqlDatabase():
             transactions
             (
                 t_id int NOT NULL AUTO_INCREMENT,
-                to varchar(255),
-                from varchar(255),
+                destination varchar(255),
+                sender varchar(255),
                 amount int,
                 PRIMARY KEY(t_id)
             );
@@ -92,4 +92,13 @@ class sqlDatabase():
                 PRIMARY KEY (owe_id) 
             );"""
         )
+    @debug
+    def removeTransaction(self):
+        self.cursor.execute(
+            """DELETE
+            FROM 
+            
+
+            """)
+
 
