@@ -30,6 +30,7 @@ class mainGUI():
         self.objects.remove(obj)
         self.titles.remove(f"{obj.t_id} {obj.name}")
 
+    # Opens up a window to collect information.
     def addINFOwindow(self, obj):
         obj.showWindow()
         obj.loopThrough()
@@ -43,10 +44,12 @@ class mainGUI():
             event, values = self.window.read()
             if event in (gui.WIN_CLOSED, 'Exit'):
                 break
+
             if values['-TITLEINPUT-'] != '':                         # if a keystroke entered in search field
                 search = values['-TITLEINPUT-']
                 new_values = [x for x in self.titles if search in x]  # do the filtering
                 self.window['-LIST-'].update(new_values)     # display in the listbox
+
             elif values['-DATEINPUT-'] != '':
                 search = values['-DATEINPUT-']
                 new_values = [x for x in self.titles if search in x]
@@ -75,7 +78,7 @@ class mainGUI():
                 
         self.window.close()
 
-
+# Defying a blueprint window to gather information for main window.
 class infoGatherer():
     def __init__(self):
         self.layout = [
@@ -90,12 +93,11 @@ class infoGatherer():
         ]
 
         self.window = gui.Window("Insert Information", self.layout, finalize=True, disable_close=True)
-        self.window.hide()
-        #self.window.un_hide()
+        self.window.hide() # Initialize a window hidden.
+
     @debug
     def loopThrough(self):
         while True:
-            
             event, values = self.window.read()
             if event in (gui.WIN_CLOSED, "Exit"): 
                 break

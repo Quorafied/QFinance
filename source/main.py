@@ -17,13 +17,16 @@ class tableObj():
         self.name = n
         self.t_id = id
 
-
-global addGUI
+# Initiating the GUI windows.
 mainGUI = mainGUI()
 addGUI = infoGatherer()
 
-
+# Start the GUI up via the main Graphical User interface.
 mainGUI.loopThrough(addGUI)
+
+
+
+
 
 # Uncomment to debug
 # anObj = oneObj("Barclays", 1)
