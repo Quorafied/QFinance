@@ -1,8 +1,10 @@
 import PySimpleGUI as gui
 from myDecorators import *
+import threading
+import time
 
 # Class that defines how the main Graphical User Interface will be layed out and how it will interact with back-end and database.
-class GUI():
+class mainGUI():
     def __init__(self):
         # Initiate the oject with empty Listbox.
         self.titles = []
@@ -12,7 +14,7 @@ class GUI():
         self.mainLayout = [[gui.Text('Search for titles'), gui.Text('Search for dates', pad=(50, 2))],
                 [gui.Input(size=(14, 1), enable_events=True, key='-TITLEINPUT-'), gui.Input(size=(14, 1), enable_events=True, key='-DATEINPUT-', pad=(40, 2))],
                 [gui.Listbox(self.titles, size=(20, 4), enable_events=True, key='-LIST-', expand_x=True)],
-                [gui.Button('Chrome'), gui.Button('Exit')],
+                [gui.Button('AddINFO'), gui.Button('Exit')],
                 [gui.Button("Remove")]
                 ]
 
@@ -28,10 +30,15 @@ class GUI():
         self.objects.remove(obj)
         self.titles.remove(f"{obj.t_id} {obj.name}")
 
+    def addINFOwindow(self, obj):
+        obj.showWindow()
+        obj.loopThrough()
+        time.sleep(1)
+        obj.hideWindow()
         
     # Event Loop
     @debug
-    def loopThrough(self):
+    def loopThrough(self, addINFOobj):
         while True:
             event, values = self.window.read()
             if event in (gui.WIN_CLOSED, 'Exit'):
@@ -62,5 +69,42 @@ class GUI():
                 # display original unfiltered list
                 self.window['-LIST-'].update(self.titles)
 
-
+            # Opens a window to insert information
+            if event == 'AddINFO':
+                self.addINFOwindow(addINFOobj)
+                
         self.window.close()
+
+
+class infoGatherer():
+    def __init__(self):
+        self.layout = [
+            [gui.Text("Destination:"), gui.Input(size=(14, 1), key="-destinationINPUT-")],
+            [gui.Text("Sender:"), gui.Input(size=(14, 1), key="-senderINPUT-")],
+            [gui.Text("Amount:"), gui.Input(size=(14, 1), key="-amountINPUT-")],
+            [gui.Text("Method:"), gui.Input(size=(14, 1), key="-methodINPUT-")],
+            [gui.Text("Platform:"), gui.Input(size=(14, 1), key="-platformINPUT-")],
+            [gui.Text("Date:"), gui.Input(size=(14, 1), key="-dateINPUT-")],
+            [gui.Text("Reason:"), gui.Input(size=(14, 1), key="-reasonINPUT-")],
+            [gui.Button("Exit")]
+        ]
+
+        self.window = gui.Window("Insert Information", self.layout, finalize=True, disable_close=True)
+        self.window.hide()
+        #self.window.un_hide()
+    @debug
+    def loopThrough(self):
+        while True:
+            
+            event, values = self.window.read()
+            if event in (gui.WIN_CLOSED, "Exit"): 
+                break
+
+    @debug
+    def hideWindow(self):
+        self.window.hide()
+
+    @debug
+    def showWindow(self):
+        self.window.un_hide()
+        
