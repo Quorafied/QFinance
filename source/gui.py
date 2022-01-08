@@ -89,7 +89,8 @@ class infoGatherer():
             [gui.Text("Platform:"), gui.Input(size=(14, 1), key="-platformINPUT-")],
             [gui.Text("Date:"), gui.Input(size=(14, 1), key="-dateINPUT-")],
             [gui.Text("Reason:"), gui.Input(size=(14, 1), key="-reasonINPUT-")],
-            [gui.Button("Exit")]
+            [gui.Button("Exit"), gui.Button("Submit")]
+            
         ]
 
         self.window = gui.Window("Insert Information", self.layout, finalize=True, disable_close=True)
@@ -102,11 +103,18 @@ class infoGatherer():
             if event in (gui.WIN_CLOSED, "Exit"): 
                 break
 
+            if event in "Submit":
+                print(values) # returns a dictionary in form "Key" : "Value" ex: {"Destionation:" : "some input"}
+                addInfo = self.getInput(values)
+
     @debug
     def hideWindow(self):
-        self.window.hide()
+        self.window.hide() 
 
     @debug
     def showWindow(self):
         self.window.un_hide()
+
+    def getInput(self, values): 
+        pass
         
