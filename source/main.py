@@ -16,10 +16,17 @@ class tableObj():
     def __init__(self, n, id):
         self.name = n
         self.t_id = id
-
+    def __str__(self):
+        return f"Name: {self.name} and ID: {self.t_id}"
 # Initiating the GUI windows.
 mainGUI = mainGUI()
 addGUI = infoGatherer()
+
+# Uncomment to debug
+# anObj = tableObj("Barclays", 1)
+# twoObj = tableObj("Kujawiak", 3)
+# mainGUI.appendObj(anObj)
+# mainGUI.appendObj(twoObj)
 
 # Start the GUI up via the main Graphical User interface.
 mainGUI.loopThrough(addGUI)
@@ -28,9 +35,11 @@ mainGUI.loopThrough(addGUI)
 
 
 
-# Uncomment to debug
-# anObj = oneObj("Barclays", 1)
-# twoObj = oneObj("Kujawiak", 3)
+
+
 # threeObj = oneObj("Barclays", 2)# Uncomment to debug
 # for i in (anObj, twoObj, threeObj):
 #     mainGUI.appendObj(i)
+
+# print(anObj)
+
