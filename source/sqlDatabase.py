@@ -101,4 +101,44 @@ class sqlDatabase():
 
             """)
 
+# Object that will hold data from the table and represent in the gui.
+class tableObject():
+    def __init__(self):
+        self.t_id = None
+        self.destination = None
+        self.sender = None
+        self.amount = None
+        self.method = None
+        self.platform = None
+        self.date = None
+        self.reason = None
 
+    # Returns information about a transaction
+    def retrieveTransaction(self):
+        return self.t_id, self.destination, self.sender, self.amount
+
+    # Returns details of a transaction
+    def retrieveTransactionDetails(self):
+        return self.method, self.platform, self.date, self.reason
+
+    # Inserts data within the object into the database.
+    def insertData(self, sqlObj):
+        # Query for inserting transaction information.
+        sqlObj.cursor.execute(
+            """INSERT
+            INTO
+            transactions
+            VALUES (?, ?, ?),
+            (self.destination, self.sender, self.amount);
+            """
+        )
+
+        # Query for inserting transaction details.
+        sqlObj.cursor.execute(
+            """INSERT
+            INTO
+            transactionDetails
+            VALUES (?, ?, ?, ?),
+            (self.method, self.platform, self.date, self.reason);
+            """
+        )
