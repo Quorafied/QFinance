@@ -92,26 +92,30 @@ class sqlDatabase():
                 PRIMARY KEY (owe_id) 
             );"""
         )
+    
+    # Needs fixing.
     @debug
     def removeTransaction(self):
         self.cursor.execute(
             """DELETE
             FROM 
-            
+            transaction
+            WHERE
+            t_id = ?
 
             """)
 
 # Object that will hold data from the table and represent in the gui.
 class tableObject():
-    def __init__(self):
-        self.t_id = None
-        self.destination = None
-        self.sender = None
-        self.amount = None
-        self.method = None
-        self.platform = None
-        self.date = None
-        self.reason = None
+    def __init__(self, t_id=None, dest=None, send=None, amnt=None, meth=None, plat=None, date=None, reason=None):
+        self.t_id = t_id
+        self.destination = dest
+        self.sender = send
+        self.amount = amnt
+        self.method = meth
+        self.platform = plat
+        self.date = date
+        self.reason = reason
 
     # Returns information about a transaction
     def retrieveTransaction(self):
